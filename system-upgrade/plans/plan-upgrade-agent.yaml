@@ -44,7 +44,7 @@ spec:
   serviceAccountName: system-upgrade
   upgrade:
     image: rancher/k3s-upgrade
-    # omit the version and add channel
-    # This will cause the controller to monitor that URL and upgrade the cluster any time it resolves to a new release
-    # version: v1.24.6+k3s1
-    channel: https://update.k3s.io/v1-release/channels/stable
+  # omit the version and add channel
+  # This will cause the controller to monitor that URL and upgrade the cluster any time it resolves to a new release
+  # version: v1.24.6+k3s1
+  channel: https://update.k3s.io/v1-release/channels/stable
