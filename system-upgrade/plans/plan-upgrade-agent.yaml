@@ -4,7 +4,8 @@ kind: Plan
 metadata:
   name: server-plan
   namespace: system-upgrade
-  app: k3s-system-upgrade
+  labels:
+    app: k3s-system-upgrade
 spec:
   concurrency: 1
   cordon: true
