@@ -1,3 +1,7 @@
+#
+# Downloaded from:
+# https://github.com/rancher/system-upgrade-controller/releases/latest/download/system-upgrade-controller.yaml
+#
 apiVersion: v1
 kind: Namespace
 metadata:
