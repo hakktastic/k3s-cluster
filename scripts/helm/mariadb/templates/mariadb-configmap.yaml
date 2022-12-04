@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-configmap
+  namespace: {{.Values.metadata.namespace}}
+  labels:
+    db: mariadb
+  annotations:
+    "helm.sh/hook": "pre-install"
+data:
+  database_url: "mariadb-service"
+  mariadb-host-port: "[IP_ADDRESS_RPIDNODE1]:[SERVICE_PORT_MARIADB]"

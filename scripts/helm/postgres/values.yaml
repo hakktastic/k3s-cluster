@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: "postgres"
+  tag: "alpine3.17"
+  pullPolicy: IfNotPresent
+  
+metadata:
+  namespace: "database"
+  
+service:
+  spec:
+    type: NodePort

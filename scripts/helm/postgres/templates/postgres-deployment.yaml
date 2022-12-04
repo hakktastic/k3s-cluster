@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  namespace: {{.Values.metadata.namespace}}
+  labels:
+    db: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      db: postgres
+  template:
+    metadata:
+      labels:
+        db: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: {{.Values.image.repository}}:{{.Values.image.tag}}
+        imagePullPolicy: {{.Values.image.pullPolicy}}
+        ports:
+        - containerPort: 3306
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-password
+        volumeMounts:
+        - name: postgres-pv
+          mountPath: /var/lib/postgresql/data
+        resources:
+              requests:
+                memory: "1024Mi"
+              limits:
+                memory: "1024Mi"
+      volumes:
+      - name: postgres-pv
+        persistentVolumeClaim:
+          claimName: postgres-pvc
