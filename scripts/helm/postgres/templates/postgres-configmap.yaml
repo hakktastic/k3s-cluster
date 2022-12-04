@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+  namespace: {{.Values.metadata.namespace}}
+  labels:
+    db: postgres
+  annotations:
+    "helm.sh/hook": "pre-install"
+data:
+  database_url: "postgres-service"
+  postgres-host-port: "[IP_ADDRESS_RPIDNODE1]:[SERVICE_PORT_MARIADB]"
