@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: {{.Values.metadata.namespace}}
+  labels:
+    cicd: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      cicd: jenkins
+  template:
+    metadata:
+      labels:
+        cicd: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: {{.Values.image.repository}}:{{.Values.image.tag}}
+        imagePullPolicy: {{.Values.image.pullPolicy}}
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50000
+          protocol: TCP
+        env:
+        - name: JAVA_OPTS
+          value: -Xmx2048m -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85
+        volumeMounts:
+        - name: jenkins
+          mountPath: /var/jenkins_home
+        resources:
+              requests:
+                memory: "1024Mi"
+              limits:
+                memory: "4096Mi"
+      volumes:
+      - name: jenkins
+        persistentVolumeClaim:
+          claimName: jenkins

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins
+  namespace: {{.Values.metadata.namespace}}
+  labels:
+    cicd: jenkins
+  annotations:
+    "helm.sh/hook": "pre-install"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
