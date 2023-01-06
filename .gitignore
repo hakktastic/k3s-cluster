@@ -1,2 +1,3 @@
-!/k3s-cluster.iml
-!/.idea/
+# intelliJ
+k3s-cluster.iml
+.idea/
