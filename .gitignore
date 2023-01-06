@@ -1,3 +1,6 @@
 # intelliJ
 k3s-cluster.iml
 .idea/
+
+# eclipse
+.project
