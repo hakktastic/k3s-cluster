@@ -2,11 +2,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
-  namespace: {{.Values.metadata.namespace}}
+  namespace: database
   labels:
     db: postgres
-  annotations:
-    "helm.sh/hook": "pre-install"
 spec:
   accessModes:
     - ReadWriteOnce
