@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+  namespace: database
+  labels:
+    db: postgres
+data:
+  database_url: "postgres-service"
+  postgres-host-port: "x:y"

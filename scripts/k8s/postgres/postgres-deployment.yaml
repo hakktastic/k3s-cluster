@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-deployment
-  namespace: {{.Values.metadata.namespace}}
+  namespace: database
   labels:
     db: postgres
 spec:
@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: {{.Values.image.repository}}:{{.Values.image.tag}}
-        imagePullPolicy: {{.Values.image.pullPolicy}}
+        image: postgres:latest
+        imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 3306
+        - containerPort: 5432
         env:
         - name: POSTGRES_USER
           valueFrom:
@@ -37,9 +37,9 @@ spec:
           mountPath: /var/lib/postgresql/data
         resources:
               requests:
-                memory: "1024Mi"
+                memory: "2048Mi"
               limits:
-                memory: "1024Mi"
+                memory: "2048Mi"
       volumes:
       - name: postgres-pv
         persistentVolumeClaim:
