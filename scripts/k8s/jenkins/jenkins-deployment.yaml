@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins
-  namespace: {{.Values.metadata.namespace}}
+  namespace: cicd
   labels:
     cicd: jenkins
 spec:
@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: {{.Values.image.repository}}:{{.Values.image.tag}}
-        imagePullPolicy: {{.Values.image.pullPolicy}}
+        image: jenkins/jenkins:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           protocol: TCP

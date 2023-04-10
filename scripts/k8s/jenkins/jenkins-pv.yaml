@@ -4,8 +4,6 @@ metadata:
   name: jenkins
   labels:
     cicd: jenkins
-  annotations:
-      "helm.sh/hook": "pre-install"
 spec:
   storageClassName: manual
   capacity:
